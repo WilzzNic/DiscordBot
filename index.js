@@ -21,15 +21,20 @@ client.on('message', message => {
     
     const args = message.content.slice(process.env.PREFIX.length).trim().split(/ !/g);
     const content = args.shift().toLowerCase().split(' ');
+    const command = content[0];
+    const parameter = content[1];
     console.log(content);
     // const command = content.toLowerCase().split(' ')[0]
     // console.log(command);
     // console.log(parameter);
 
-    switch(content[0]) {
+    switch(command) {
         case "countries":
-        countries(content[1], message);
-        break;
+            countries(parameter, message);
+            break;
+        case "holiday":
+            holiday(parameter, message);
+            break;
     }
 
     // message.channel.send(countries); 
@@ -63,4 +68,10 @@ function countries(country, message) {
         // always executed
         
     });
+}
+
+function holiday(country, message) {
+    var datetime = new Date();
+    console.log(datetime);
+    message.channel.send(datetime.toDateString());
 }
